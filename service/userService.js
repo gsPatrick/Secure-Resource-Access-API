@@ -11,7 +11,7 @@ const newUser = async (userData) => {
             email : userData.email,
             password: hashedPassword,
             acessLevel : 'user'
-        })
+        });
         return newUser;
     } catch (error) {
         console.log(userData)
@@ -81,9 +81,7 @@ const updateAcessLevel = async (token, userId, newAcessLevel) => {
         if(decoded.acessLevel !=='superAdmin') {
             throw new Error("Acesso Negado");
         }
-
         const targetUser = await User.findOne({ where: { id: userId } });
-    
         if (!targetUser) {
             throw new Error("Usuário não encotrado");
         }
@@ -93,7 +91,7 @@ const updateAcessLevel = async (token, userId, newAcessLevel) => {
     } catch (error) {
         throw new Error("Não foi possível atualizar o nível de acesso: " + error.message);
     }
-}
+};
 
 module.exports = {
     newUser,
